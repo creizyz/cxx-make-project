@@ -33,7 +33,7 @@ LDFLAGS   := $(FLAGS)
 
 INC       := $(PROJECT_INCLUDE:%=-I%) -I$(INCLUDE_DIR)
 LIB       := $(PROJECT_LIB_PATH:%=-L%) $(PROJECT_LIB:%=-l%)
-SRC       := $(call rwildcard,src/,*.cpp)
+SRC       := $(call rwildcard,$(SOURCE_DIR)/,*.cpp)
 OBJ       := $(SRC:$(SOURCE_DIR)/%.cpp=$(OBJDIR)/%.o)
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 
@@ -56,11 +56,11 @@ $(EXEC): $(OBJ)
 	@mkdir -p $(dir $@)
 	$(LD) $(LDFLAGS) $(LIB) -o $@ $^
 
-$(OBJDIR)/%.o: src/%.cpp
+$(OBJDIR)/%.o: $(SOURCE_DIR)/%.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $(INC) -o $@ -c $<
 
-$(OBJDIR)/%.d : src/%.cpp
+$(OBJDIR)/%.d : $(SOURCE_DIR)/%.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(INC) $(CXXFLAGS) -MM -MF $@ -MT $(@:%.d=%.o) $<
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
