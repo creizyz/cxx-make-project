@@ -1,0 +1,7 @@
+* linguist-vendored
+
+*.h linguist-vendored=false
+*.c linguist-vendored=false
+
+*.hpp linguist-vendored=false
+*.cpp linguist-vendored=false
